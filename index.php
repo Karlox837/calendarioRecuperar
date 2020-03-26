@@ -85,9 +85,17 @@ $events = $req->fetchAll();
                 <h1>Calendario Salas de Reunion Recuperar</h1>
                 <p class="lead"></p>
                 <div id="calendar" class="col-centered">
+					<div class="col-lg-12 text-center">
+						<h1>Salas de Reunion</h1>
+							<ul>
+								<li style="color:#0071c5;">Sala 1</li>
+								<li style="color:#40E0D0;">Sala 2</li>
+								<li style="color:#008000;">Sala 3</li>
+								<li style="color:#FFD700;">Sala 4</li>
+							</ul>
+					</div>
                 </div>
             </div>
-			
         </div>
         <!-- /.row -->
 		
