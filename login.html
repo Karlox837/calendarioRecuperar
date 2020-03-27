@@ -1,14 +1,3 @@
-<?php
-require_once('./config/bdd.php');
-
-$sql = "SELECT login, clave, nombre FROM usuarios";
-
-$req = $bdd->prepare($sql);
-$req->execute();
-
-
-$events = $req->fetchAll();
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,19 +17,19 @@ $events = $req->fetchAll();
     <!--Cuerpo de la pagina-->
     <div id="login-page">
         <div class="container">
-            <form class="form-login" name="login">
+            <form class="form-login" id="login" name="login" action="checkLogin.php" method="POST"> 
                 <h2 class="form-login-heading">Iniciar sesión</h2>
                 <div class="login-wrap">
-                    <input type="text" class="form-control" placeholder="Usuario" autofocus>
+                    <input name="username" id="username" type="text" class="form-control" placeholder="Usuario" autofocus required>
                 </br>
-                    <input type="password" class="form-control" placeholder="Contraseña">
+                    <input name ="password" id="password" type="password" class="form-control" placeholder="Contraseña" required>
                         <span class="pull-right">
                             <label class="checkbox">
                             <input type="checkbox" value="RecordarUsuario"> Recordar Usuario </input>
                             </label>
                         </span>
                 </br>
-                <button class="btn btn-theme btn-block" onclick="login()" type="button"><i class="fa fa-lock"></i>Ingresar</button>    
+                <button class="btn btn-theme btn-block"><i class="fa fa-lock"></i>Ingresar</button>    
                 </div>
             </form>
         </div>
@@ -52,15 +41,6 @@ $events = $req->fetchAll();
     <script type="text/javascript" src="js/jquery.backstretch.min.js"></script>
     <script>
         $.backstretch("img/login-background.jpg",{ speed:1000});
-
-        function login(){
-            var done = 0;
-            var usuario = document.login.usuario.value;
-            var password= document.login.password.value;
-
-            if(usuario)
-
-        }
-    </script>
+    </script> 
 </body>
 </html>

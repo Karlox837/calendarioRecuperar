@@ -1,5 +1,7 @@
 <?php
+session_start();
 require_once('./config/bdd.php');
+require_once('./config/session.php');
 
 
 $sql = "SELECT id, title, start, end, color FROM events ";
@@ -68,7 +70,7 @@ $events = $req->fetchAll();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Salir</a>
+                        <a href="./config/logout.php">Salir</a>
                     </li>
                 </ul>
             </div>
