@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico" type="image/icon ">
     <title>Calendario Salas Recuperar</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +18,7 @@
     <!--Cuerpo de la pagina-->
     <div id="login-page">
         <div class="container">
-            <form class="form-login" id="login" name="login" action="checkLogin.php" method="POST"> 
+            <form class="form-login" id="login" name="login" action="" method="POST"> 
                 <h2 class="form-login-heading">Iniciar sesión</h2>
                 <div class="login-wrap">
                     <input name="username" id="username" type="text" class="form-control" placeholder="Usuario" autofocus required>
@@ -29,8 +30,11 @@
                             </label>
                         </span>
                 </br>
-                <button class="btn btn-theme btn-block"><i class="fa fa-lock"></i>Ingresar</button>
-                <a class="btn btn-theme btn-block" href="consulta.php" role="button"><i class="fa fa-lock"></i>Consultar Calendario</a>   
+                <input type="submit" class="btn btn-theme btn-block"  value="Ingresar" id="ingresar" dir="checkLogin.php" />
+                <input type="submit" class="btn btn-theme btn-block"  value="Administrar eventos" id="administrar" dir="checkAdmin.php" />
+                
+                <a class="btn btn-theme btn-block" href="consulta.php" role="button"><i class="fa fa-lock"></i>Consultar Calendario</a>
+ 
                 </div>
             </form>
         </div>
@@ -43,5 +47,17 @@
     <script>
         $.backstretch("img/login-background.jpg",{ speed:1000});
     </script> 
+    <!-- Para validar el boton de adminstrar eventos o ingresar a la app-->
+    <script>
+    $(document).ready(function(){
+  
+        $("input[type=submit]").click(function() {
+          var accion = $(this).attr('dir');
+          $('form').attr('action', accion);
+          $('form').submit();
+        });
+        
+      });
+    </script>
 </body>
 </html>

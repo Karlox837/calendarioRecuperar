@@ -1,13 +1,15 @@
 <?php
-
+session_start();
 require_once('./config/bdd.php');
+require_once('./config/session.php');
+
+
 $sql = "SELECT * FROM events";
 
 $req = $bdd->prepare($sql);
 $req->execute();
 
 $events = $req->fetchAll();
-
 
 ?>
 
@@ -19,9 +21,9 @@ $events = $req->fetchAll();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
+    <meta name="description" content="">
+	<meta name="author" content="">
 	<link rel="icon" href="img/favicon.ico" type="image/icon ">
-    <meta name="author" content="">
 
     <title>Inicio</title>
 
@@ -51,18 +53,21 @@ $events = $req->fetchAll();
 </head>
 
 <body>
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="icon-bar" data-target="#ModalUser">Usuarios</span>
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-				<a class="navbar-brand" href="consulta.php">Calendario</a>
+				<a class="navbar-brand" href="index.php">Calendario</a>
+				<a class="navbar-brand" data-toggle="modal" data-target="#ModalUser">Usuarios</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -74,10 +79,10 @@ $events = $req->fetchAll();
             </div>
             <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container -->
     </nav>
-    <!--/Navigation-->
 
-    <!--Page Content-->
+    <!-- Page Content -->
     <div class="container">
 
         <div class="row">
@@ -118,33 +123,106 @@ $events = $req->fetchAll();
         						</tr>
    						 </tbody>
 						</table>
-					</div>
                 </div>
             </div>
         </div>
         <!-- /.row -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		
+		<!-- Modal -->
+		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
-			<form class="form-horizontal" method="POST" action="editEventTitle.php">
+			<form class="form-horizontal" method="POST" action="addEvent.php">
+			
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Consultar Evento</h4>
+				<h4 class="modal-title" id="myModalLabel">Agregar Evento</h4>
 			  </div>
 			  <div class="modal-body">
 				
 				  <div class="form-group">
 					<label for="title" class="col-sm-2 control-label">Titulo</label>
 					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title"  disabled >
+					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo">
 					</div>
 				  </div>
 				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Sala de reunion</label>
+					<label for="color" class="col-sm-2 control-label">Sala</label>
 					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color"  disabled>
+					  <select name="color" class="form-control" id="color">
+									  <option value="">Seleccionar</option>
+						  <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
+						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
+						  <option style="color:#008000;" value="#008000">&#9724; Sala 3</option>						  
+						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>
+						  <!--<option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
+						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
+						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
+						  
+						</select>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="start" class="col-sm-2 control-label">Fecha Inicial</label>
+					<div class="col-sm-10">
+					  <input type="text" name="start" class="form-control" id="start" >
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
+					<div class="col-sm-10">
+					  <input type="text" name="end" class="form-control" id="end">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="reserva" class="col-sm-2 control-label">Reserva a nombre de:</label>
+					<div class="col-sm-10">
+					  <input type="text" name="reserva" class="form-control" id="reserva">
+					</div>
+				  </div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			  </div>
+			</form>
+			</div>
+		  </div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<form class="form-horizontal" method="POST" action="editEventTitle.php">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Modificar Evento</h4>
+			  </div>
+			  <div class="modal-body">
+				
+				  <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Titulo</label >
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="start" class="col-sm-2 control-label">Fecha Inicial</label dis>
+					<div class="col-sm-10">
+					  <input type="text" name="start" class="form-control" id="start" >
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
+					<div class="col-sm-10">
+					  <input type="text" name="end" class="form-control" id="end">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="color" class="col-sm-2 control-label">Sala</label>
+					<div class="col-sm-10">
+					  <select name="color" class="form-control" id="color" disabled>
 						  <option value="">Seleccionar</option>
                           <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
 						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
@@ -155,40 +233,86 @@ $events = $req->fetchAll();
 						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
 						  
 						</select>
-                    </div>
-                    </div>
-					<div class="form-group">
-					<label for="start" class="col-sm-2 control-label">Fecha Inicial</label>
-					<div class="col-sm-10">
-					  <input type="text" name="start" class="form-control" id="start"  disabled>
 					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
-					<div class="col-sm-10">
-					  <input type="text" name="end" class="form-control" id="end"  disabled>
 					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="reserva" class="col-sm-2 control-label">Reserva a nombre de:</label>
+					<label for="reserva" class="col-sm-2 control-label">Reservo:</label>
 					<div class="col-sm-10">
-					  <input type="text" name="reserva" class="form-control" id="reserva" disabled>
+					  <input type="text" name="reserva" class="form-control" id="reserva" placeholder="reserva">
 					</div>
-				  </div>
-				  </div>
-			  
+					
+				    <div class="form-group"> 
+						
+					</div>
+				  
 				  <input type="hidden" name="id" class="form-control" id="id">
+                  <div class="form-group"> 
+						<div class="col-sm-offset-2 col-sm-10">
+						  <div class="checkbox">
+							<label class="text-danger"><input type="checkbox"  name="delete"> Eliminar Evento</label>
+						  </div>
+						</div>
+					</div>
 				
-				
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
 			  </div>
 			</form>
 			</div>
 		  </div>
 		</div>
 
+		<!-- Modal  Para administrar usuarios -->
+		<div class="modal fade" id="ModalUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<form class="form-horizontal" method="POST" action="addEditUser.php">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Modificar Usuarios</h4>
+			  </div>
+			  <div class="modal-body">
+			  <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Nombre</label>
+					<div class="col-sm-10">
+					  <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Usuario</label>
+					<div class="col-sm-10">
+					  <input type="text" name="login" class="form-control" id="login" placeholder="login">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="color" class="col-sm-2 control-label">Clave</label>
+					<div class="col-sm-10">
+						<input type="text" name="clave" class="form-control" id="clave" placeholder="Clave">
+					</div>
+				  </div>
+				    <div class="form-group"> 
+						<div class="col-sm-offset-2 col-sm-10">
+						  <div class="checkbox">
+							<label class="text-danger"><input type="checkbox"  name="delete"> Eliminar Usuario</label>
+						  </div>
+						</div>
+					</div>
+				  
+				  <input type="hidden" name="id" class="form-control" id="id">
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			  </div>
+			</form>
+			</div>
+		  </div>
+		</div>
 
+    </div>
+    <!-- /.container -->
 
-    <!-- scripts -->   
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
 
@@ -238,7 +362,7 @@ $events = $req->fetchAll();
 					$('#ModalEdit #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
 					$('#ModalEdit #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
 					$('#ModalEdit #reserva').val(event.reserva);
-					$('#ModalEdit').modal('show');;
+					$('#ModalEdit').modal('show');
 				});
 			},
 			eventDrop: function(event, delta, revertFunc) { // si changement de position
@@ -313,5 +437,7 @@ $events = $req->fetchAll();
 
 </script>
 
-
 </body>
+
+</html>
+44

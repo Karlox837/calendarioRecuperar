@@ -16,7 +16,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
             <div class="error_ex">
                 <h1>Atencion</h1>
                 <p>La session expiro ingresa nuevamente</p>
-                <a href="index.html"><button class="btn btn-danger btn-large">Inicio</button></a>
+                <a href="login.html"><button class="btn btn-danger btn-large">Inicio</button></a>
           </div>
         </div>
       </div>

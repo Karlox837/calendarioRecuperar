@@ -4,7 +4,7 @@ require_once('./config/bdd.php');
 require_once('./config/session.php');
 
 
-$sql = "SELECT id, title, start, end, color FROM events ";
+$sql = "SELECT * FROM events";
 
 $req = $bdd->prepare($sql);
 $req->execute();
@@ -22,7 +22,8 @@ $events = $req->fetchAll();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="img/favicon.ico" type="image/icon ">
 
     <title>Inicio</title>
 
@@ -90,14 +91,38 @@ $events = $req->fetchAll();
                 <p class="lead"></p>
                 <div id="calendar" class="col-centered">
 					<div class="col-lg-12 text-center">
-						<h1>Salas de Reunion</h1>
-							<ul>
-								<li style="color:#0071c5;">Sala 1</li>
-								<li style="color:#40E0D0;">Sala 2</li>
-								<li style="color:#008000;">Sala 3</li>
-								<li style="color:#FFD700;">Sala 4</li>
-							</ul>
-					</div>
+					<h2 class=”h2-error”>Salas <span class=”break”></span></h2>
+						<table class="table table-responsive">
+    						<thead>
+        						<tr>
+            					<th>Nombre</th>
+            					<th>Capacidad</th>
+            					<th>Recursos Tecnológicos</th>
+        						</tr>
+    						</thead>
+    					<tbody>
+        						<tr>
+									<td style="color:#0071c5;">Sala 1</td>
+									<td>5</td>
+									<td>Tablero Móvil, Cámara Fija</td>
+								</tr>
+        						<tr>
+									<td style="color:#40E0D0;">Sala 2</td>
+									<td>10</td>
+									<td>Proyector, Parlantes</td>
+        						</tr>
+        						<tr>
+									<td style="color:#008000;">Sala 3</td>
+									<td>5</td>
+									<td>Ninguno </td>
+								</tr>
+								<tr>
+									<td style="color:#FFD700;">Auditorio Guillermo Heredia </td>
+									<td>18</td>
+									<td>Proyector, Tablero, Consola, Equipo</td>
+        						</tr>
+   						 </tbody>
+						</table>
                 </div>
             </div>
         </div>
@@ -127,9 +152,9 @@ $events = $req->fetchAll();
 					  <select name="color" class="form-control" id="color">
 									  <option value="">Seleccionar</option>
 						  <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
-						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Sala 2</option>
+						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
 						  <option style="color:#008000;" value="#008000">&#9724; Sala 3</option>						  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Sala 4</option>
+						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>
 						  <!--<option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
 						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
 						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
@@ -146,10 +171,15 @@ $events = $req->fetchAll();
 				  <div class="form-group">
 					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
 					<div class="col-sm-10">
-					  <input type="text" name="end" class="form-control" id="end">
+					  <input type="text" name="end" class="form-control" id="end" >
 					</div>
 				  </div>
-				
+				  <div class="form-group">
+					<label for="reserva" class="col-sm-2 control-label">Reserva a nombre de:</label>
+					<div class="col-sm-10">
+					  <input type="text" name="reserva" class="form-control" id="reserva">
+					</div>
+				  </div>
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
@@ -178,27 +208,40 @@ $events = $req->fetchAll();
 					</div>
 				  </div>
 				  <div class="form-group">
+					<label for="start" class="col-sm-2 control-label">Fecha Inicial</label>
+					<div class="col-sm-10">
+					  <input type="text" name="start" class="form-control" id="start" disabled>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
+					<div class="col-sm-10">
+					  <input type="text" name="end" class="form-control" id="end" disabled>
+					</div>
+				  </div>
+				  <div class="form-group">
 					<label for="color" class="col-sm-2 control-label">Sala</label>
 					<div class="col-sm-10">
 					  <select name="color" class="form-control" id="color">
 						  <option value="">Seleccionar</option>
                           <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
-						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Sala 2</option>
+						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
 						  <option style="color:#008000;" value="#008000">&#9724; Sala 3</option>						  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Sala 4</option>
+						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>
 						  <!--<option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
 						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
 						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
 						  
 						</select>
 					</div>
-				  </div>
+					</div>
+					<label for="reserva" class="col-sm-2 control-label">Reservo:</label>
+					<div class="col-sm-10">
+					  <input type="text" name="reserva" class="form-control" id="reserva" placeholder="reserva">
+					</div>
+					
 				    <div class="form-group"> 
-						<div class="col-sm-offset-2 col-sm-10">
-						  <div class="checkbox">
-							<label class="text-danger"><input type="checkbox"  name="delete"> Eliminar Evento</label>
-						  </div>
-						</div>
+						
 					</div>
 				  
 				  <input type="hidden" name="id" class="form-control" id="id">
@@ -291,7 +334,7 @@ $events = $req->fetchAll();
 				language: 'es',
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,basicWeek,basicDay',
+				right: 'month,agendaWeek,agendaDay',
 
 			},
 			defaultDate: yyyy+"-"+mm+"-"+dd,
@@ -310,6 +353,9 @@ $events = $req->fetchAll();
 					$('#ModalEdit #id').val(event.id);
 					$('#ModalEdit #title').val(event.title);
 					$('#ModalEdit #color').val(event.color);
+					$('#ModalEdit #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+					$('#ModalEdit #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+					$('#ModalEdit #reserva').val(event.reserva);
 					$('#ModalEdit').modal('show');
 				});
 			},
@@ -328,6 +374,7 @@ $events = $req->fetchAll();
 			
 				$start = explode(" ", $event['start']);
 				$end = explode(" ", $event['end']);
+				$reserva = explode(" ", $event['reserva']);
 				if($start[1] == '00:00:00'){
 					$start = $start[0];
 				}else{
@@ -345,6 +392,7 @@ $events = $req->fetchAll();
 					start: '<?php echo $start; ?>',
 					end: '<?php echo $end; ?>',
 					color: '<?php echo $event['color']; ?>',
+					reserva: '<?php echo $event['reserva'];?>',
 				},
 			<?php endforeach; ?>
 			]
