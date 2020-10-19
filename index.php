@@ -129,6 +129,7 @@ $events = $req->fetchAll();
         <!-- /.row -->
 		
 		<!-- Modal -->
+		<!-- Ventana para agregar evento -->
 		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -149,16 +150,12 @@ $events = $req->fetchAll();
 				  <div class="form-group">
 					<label for="color" class="col-sm-2 control-label">Sala</label>
 					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color">
-									  <option value="">Seleccionar</option>
+						<select name="color" class="form-control" id="color">
+						  <option value="">Seleccionar</option>
 						  <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
 						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
 						  <option style="color:#008000;" value="#008000">&#9724; Sala 3</option>						  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>
-						  <!--<option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
-						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
-						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
-						  
+						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>						  
 						</select>
 					</div>
 				  </div>
@@ -166,12 +163,14 @@ $events = $req->fetchAll();
 					<label for="start" class="col-sm-2 control-label">Fecha Inicial</label>
 					<div class="col-sm-10">
 					  <input type="text" name="start" class="form-control" id="start" >
+					  <p class="note">Formato YYYY-DD-MM HH:mm:ss</p>
 					</div>
 				  </div>
 				  <div class="form-group">
 					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
 					<div class="col-sm-10">
 					  <input type="text" name="end" class="form-control" id="end" >
+					  <p class="note">Formato YYYY-DD-MM HH:mm:ss</p>
 					</div>
 				  </div>
 				  <div class="form-group">
@@ -189,8 +188,9 @@ $events = $req->fetchAll();
 			</div>
 		  </div>
 		</div>
-		
+		<!-- /Ventana para agregar evento -->
 		<!-- Modal -->
+		<!-- Ventana para editar evento -->
 		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -200,11 +200,10 @@ $events = $req->fetchAll();
 				<h4 class="modal-title" id="myModalLabel">Modificar Evento</h4>
 			  </div>
 			  <div class="modal-body">
-				
 				  <div class="form-group">
 					<label for="title" class="col-sm-2 control-label">Titulo</label>
 					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo">
+					  <input type="text" name="title" class="form-control"  id="title" placeholder="Titulo">
 					</div>
 				  </div>
 				  <div class="form-group">
@@ -222,16 +221,12 @@ $events = $req->fetchAll();
 				  <div class="form-group">
 					<label for="color" class="col-sm-2 control-label">Sala</label>
 					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color">
+						<select name="color" class="form-control" id="color">
 						  <option value="">Seleccionar</option>
                           <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
 						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
 						  <option style="color:#008000;" value="#008000">&#9724; Sala 3</option>						  
 						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>
-						  <!--<option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
-						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
-						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
-						  
 						</select>
 					</div>
 					</div>
@@ -239,14 +234,9 @@ $events = $req->fetchAll();
 					<div class="col-sm-10">
 					  <input type="text" name="reserva" class="form-control" id="reserva" placeholder="reserva">
 					</div>
-					
 				    <div class="form-group"> 
-						
 					</div>
-				  
-				  <input type="hidden" name="id" class="form-control" id="id">
-				
-				
+				  	<input type="hidden" name="id" class="form-control" id="id">
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -256,6 +246,7 @@ $events = $req->fetchAll();
 			</div>
 		  </div>
 		</div>
+		<!-- /Ventana para agregar evento -->
 
 		<!-- Modal  Para administrar usuarios -->
 		<div class="modal fade" id="ModalUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -303,6 +294,7 @@ $events = $req->fetchAll();
 			</div>
 		  </div>
 		</div>
+		<!-- /Modal  Para administrar usuarios -->
 
     </div>
     <!-- /.container -->
@@ -334,7 +326,7 @@ $events = $req->fetchAll();
 				language: 'es',
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay',
+				right: 'agendaWeek,agendaDay,month',
 
 			},
 			defaultDate: yyyy+"-"+mm+"-"+dd,
@@ -344,8 +336,8 @@ $events = $req->fetchAll();
 			selectHelper: true,
 			select: function(start, end) {
 				
-				$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-				$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+				$('#ModalAdd #start').val(moment(start).format('YYYY-DD-MM HH:mm:ss'));
+				$('#ModalAdd #end').val(moment(end).format('YYYY-DD-MM HH:mm:ss'));
 				$('#ModalAdd').modal('show');
 			},
 			eventRender: function(event, element) {
@@ -353,8 +345,8 @@ $events = $req->fetchAll();
 					$('#ModalEdit #id').val(event.id);
 					$('#ModalEdit #title').val(event.title);
 					$('#ModalEdit #color').val(event.color);
-					$('#ModalEdit #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-					$('#ModalEdit #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+					$('#ModalEdit #start').val(moment(start).format('YYYY-DD-MM HH:mm:ss'));
+					$('#ModalEdit #end').val(moment(end).format('YYYY-DD-MM HH:mm:ss'));
 					$('#ModalEdit #reserva').val(event.reserva);
 					$('#ModalEdit').modal('show');
 				});
@@ -399,9 +391,9 @@ $events = $req->fetchAll();
 		});
 		
 		function edit(event){
-			start = event.start.format('YYYY-MM-DD HH:mm:ss');
+			start = event.start.format('YYYY-DD-MM HH:mm:ss');
 			if(event.end){
-				end = event.end.format('YYYY-MM-DD HH:mm:ss');
+				end = event.end.format('YYYY-DD-MM HH:mm:ss');
 			}else{
 				end = start;
 			}

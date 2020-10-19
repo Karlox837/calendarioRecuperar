@@ -123,7 +123,7 @@ $events = $req->fetchAll();
             </div>
         </div>
         <!-- /.row -->
-
+		<!-- Ventana para consultar un evento -->
         <!-- Modal -->
         <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
@@ -149,11 +149,7 @@ $events = $req->fetchAll();
                           <option style="color:#0071c5;" value="#0071c5">&#9724; Sala 1</option>
 						  <option style="color:#FB2C00;" value="#FB2C00">&#9724; Sala 2</option>
 						  <option style="color:#008000;" value="#008000">&#9724; Sala 3</option>						  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option>
-						  <!--<option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
-						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
-						  <option style="color:#000;" value="#000">&#9724; Negro</option>-->
-						  
+						  <option style="color:#FFD700;" value="#FFD700">&#9724; Auditorio Guillermo Heredia </option> 
 						</select>
                     </div>
                     </div>
@@ -178,15 +174,12 @@ $events = $req->fetchAll();
 				  </div>
 			  
 				  <input type="hidden" name="id" class="form-control" id="id">
-				
-				
 			  </div>
 			</form>
 			</div>
 		  </div>
 		</div>
-
-
+		<!-- /Ventana para consultar un evento -->
 
     <!-- scripts -->   
     <!-- jQuery Version 1.11.1 -->
@@ -226,8 +219,8 @@ $events = $req->fetchAll();
 			selectHelper: true,
 			select: function(start, end) {
 				
-				$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-				$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+				$('#ModalAdd #start').val(moment(start).format('YYYY-DD-MM HH:mm:ss'));
+				$('#ModalAdd #end').val(moment(end).format('YYYY-DD-MM HH:mm:ss'));
 				$('#ModalAdd').modal('show');
 			},
 			eventRender: function(event, element) {
@@ -235,8 +228,8 @@ $events = $req->fetchAll();
 					$('#ModalEdit #id').val(event.id);
 					$('#ModalEdit #title').val(event.title);
 					$('#ModalEdit #color').val(event.color);
-					$('#ModalEdit #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-					$('#ModalEdit #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+					$('#ModalEdit #start').val(moment(start).format('YYYY-DD-MM HH:mm:ss'));
+					$('#ModalEdit #end').val(moment(end).format('YYYY-DD-MM HH:mm:ss'));
 					$('#ModalEdit #reserva').val(event.reserva);
 					$('#ModalEdit').modal('show');;
 				});
@@ -281,9 +274,9 @@ $events = $req->fetchAll();
 		});
 		
 		function edit(event){
-			start = event.start.format('YYYY-MM-DD HH:mm:ss');
+			start = event.start.format('YYYY-DD-MM HH:mm:ss');
 			if(event.end){
-				end = event.end.format('YYYY-MM-DD HH:mm:ss');
+				end = event.end.format('YYYY-DD-MM HH:mm:ss');
 			}else{
 				end = start;
 			}
