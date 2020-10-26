@@ -334,6 +334,7 @@ $events = $req->fetchAll();
 			eventLimit: true, // allow "more" link when too many events
 			selectable: true,
 			selectHelper: true,
+			defaultView: 'agendaWeek',
 			select: function(start, end) {
 				
 				$('#ModalAdd #start').val(moment(start).format('YYYY-DD-MM HH:mm:ss'));
